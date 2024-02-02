@@ -1,10 +1,12 @@
 package cn.keking.utils;
 
+import cn.keking.config.ConfigConstants;
 import io.mola.galimatias.GalimatiasParseException;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Base64Utils;
+import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.HtmlUtils;
 
@@ -38,6 +40,35 @@ public class WebUtils {
      */
     public static URL normalizedURL(String urlStr) throws GalimatiasParseException, MalformedURLException {
         return io.mola.galimatias.URL.parse(urlStr).toJavaURL();
+    }
+
+    public static String getBaseUrl() {
+        String baseUrl;
+        try {
+            baseUrl = (String) RequestContextHolder.currentRequestAttributes().getAttribute("baseUrl", 0);
+        } catch (Exception e) {
+            String configBaseUrl = ConfigConstants.getBaseUrl();
+
+            final HttpServletRequest servletRequest = ServletUtils.getRequest();
+            //1、支持通过 http header 中 X-Base-Url 来动态设置 baseUrl 以支持多个域名/项目的共享使用
+            final String urlInHeader = servletRequest.getHeader("X-Base-Url");
+            if (StringUtils.isNotEmpty(urlInHeader)) {
+                baseUrl = urlInHeader;
+            } else if (configBaseUrl != null && !ConfigConstants.DEFAULT_BASE_URL.equalsIgnoreCase(configBaseUrl)) {
+                //2、如果配置文件中配置了 baseUrl 且不为 default 则以配置文件为准
+                baseUrl = configBaseUrl;
+            } else {
+                //3、默认动态拼接 baseUrl
+                baseUrl = servletRequest.getScheme() + "://" + servletRequest.getServerName() + ":" + servletRequest.getServerPort()
+                        + servletRequest.getContextPath() + "/";
+            }
+
+            if (!baseUrl.endsWith("/")) {
+                baseUrl = baseUrl.concat("/");
+            }
+        }
+        return baseUrl;
+
     }
 
     /**

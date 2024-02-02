@@ -61,44 +61,7 @@
         </dependency>
         <!-- web end -->
 
-        <!-- poi start -->
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi</artifactId>
-            <version>${poi.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-scratchpad</artifactId>
-            <version>${poi.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml</artifactId>
-            <version>${poi.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>fr.opensagres.xdocreport</groupId>
-            <artifactId>org.apache.poi.xwpf.converter.core</artifactId>
-            <version>${xdocreport.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>poi</artifactId>
-                    <groupId>org.apache.poi</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>fr.opensagres.xdocreport</groupId>
-            <artifactId>org.apache.poi.xwpf.converter.xhtml</artifactId>
-            <version>${xdocreport.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>fr.opensagres.xdocreport</groupId>
-            <artifactId>fr.opensagres.xdocreport.document</artifactId>
-            <version>${xdocreport.version}</version>
-        </dependency>
-        <!-- poi start -->
+
 
         <!-- 对 rar5 的支持 和其他众多压缩支持 可参考 package net.sf.sevenzipjbinding.ArchiveFormat; -->
         <dependency>
@@ -123,12 +86,7 @@
             <version>${redisson.version}</version>
         </dependency>
 
-        <!-- 编码检测-JUniversalCharDet-->
-        <dependency>
-            <groupId>com.googlecode.juniversalchardet</groupId>
-            <artifactId>juniversalchardet</artifactId>
-            <version>${juniversalchardet.version}</version>
-        </dependency>
+
 
         <!-- 解压(rar)-->
         <dependency>
@@ -198,23 +156,14 @@
             <artifactId>jbig2-imageio</artifactId>
             <version>${jbig2-imageio.version}</version>
         </dependency>
-         <dependency>
-            <groupId>com.aspose</groupId>
-            <artifactId>aspose-cad</artifactId>
-            <version>${aspose-cad.version}</version>
-        </dependency>
+
         <!-- 密钥算法 -->
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcprov-jdk15on</artifactId>
             <version>${bcprov-jdk15on.version}</version>
         </dependency>
-        <!-- url 规范化 -->
-        <dependency>
-            <groupId>io.mola.galimatias</groupId>
-            <artifactId>galimatias</artifactId>
-            <version>${galimatias.version}</version>
-        </dependency>
+
 
         <!-- 以下是bytedeco 基于opencv ffmpeg封装的javacv，用于视频处理 -->
         <dependency>
@@ -305,6 +254,11 @@
             </exclusions>
         </dependency>
         <!-- test dependency - end -->
+
+        <dependency>
+            <groupId>cn.keking</groupId>
+            <artifactId>kkfile-extension-cad</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

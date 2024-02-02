@@ -50,6 +50,8 @@
 
     <modules>
         <module>server</module>
+        <module>kkfile-file-extensions/kkfile-extension-cad</module>
+        <module>kkfile-common</module>
     </modules>
 
     <name>kkFileView-parent</name>
@@ -87,5 +89,14 @@
         <system>github</system>
         <url>https://github.com/kekingcn/kkFileView/issues</url>
     </issueManagement>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>cn.keking</groupId>
+                <artifactId>kkfile-extension-cad</artifactId>
+                <version>4.4.0-SNAPSHOT</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>

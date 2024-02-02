@@ -1,8 +1,9 @@
-package cn.keking.service;
+package cn.keking.service.impl;
 
 import cn.keking.config.ConfigConstants;
 import cn.keking.model.FileAttribute;
 import cn.keking.model.FileType;
+import cn.keking.service.CompressFileReader;
 import cn.keking.utils.RarUtils;
 import cn.keking.web.filter.BaseUrlFilter;
 import net.sf.sevenzipjbinding.ExtractOperationResult;
@@ -14,7 +15,6 @@ import net.sf.sevenzipjbinding.simple.ISimpleInArchive;
 import net.sf.sevenzipjbinding.simple.ISimpleInArchiveItem;
 import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ObjectUtils;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -26,14 +26,15 @@ import java.util.List;
  * create 2017/11/27
  */
 @Component
-public class CompressFileReader {
-    private final FileHandlerService fileHandlerService;
+public class CompressFileReaderimpl implements CompressFileReader {
+    private final FileHandlerServiceImpl fileHandlerService;
     private static final String fileDir = ConfigConstants.getFileDir();
 
-    public CompressFileReader(FileHandlerService fileHandlerService) {
+    public CompressFileReaderimpl(FileHandlerServiceImpl fileHandlerService) {
         this.fileHandlerService = fileHandlerService;
     }
 
+    @Override
     public String unRar(String filePath, String filePassword, String fileName, FileAttribute fileAttribute) throws Exception {
         List<String> imgUrls = new ArrayList<>();
         String baseUrl = BaseUrlFilter.getBaseUrl();

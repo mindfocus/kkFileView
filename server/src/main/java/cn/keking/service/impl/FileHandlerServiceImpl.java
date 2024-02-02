@@ -1,8 +1,9 @@
-package cn.keking.service;
+package cn.keking.service.impl;
 
 import cn.keking.config.ConfigConstants;
 import cn.keking.model.FileAttribute;
 import cn.keking.model.FileType;
+import cn.keking.service.FileHandlerService;
 import cn.keking.service.cache.CacheService;
 import cn.keking.service.cache.NotResourceCache;
 import cn.keking.utils.EncodingDetects;
@@ -55,23 +56,33 @@ import java.util.stream.IntStream;
  */
 @Component
 @DependsOn(ConfigConstants.BEAN_NAME)
-public class FileHandlerService implements InitializingBean {
+public class FileHandlerServiceImpl implements InitializingBean, FileHandlerService {
 
     private static final String PDF2JPG_IMAGE_FORMAT = ".jpg";
     private static final String PDF_PASSWORD_MSG = "password";
-    private final Logger logger = LoggerFactory.getLogger(FileHandlerService.class);
+    private final Logger logger = LoggerFactory.getLogger(FileHandlerServiceImpl.class);
     private final String fileDir = ConfigConstants.getFileDir();
     private final CacheService cacheService;
     @Value("${server.tomcat.uri-encoding:UTF-8}")
     private String uriEncoding;
 
-    public FileHandlerService(CacheService cacheService) {
+    public FileHandlerServiceImpl(CacheService cacheService) {
         this.cacheService = cacheService;
+    }
+
+    /**
+     * @param str    原字符串（待截取原串）
+     * @param posStr 指定字符串
+     * @return 截取截取指定字符串之后的数据
+     */
+    public static String getSubString(String str, String posStr) {
+        return str.substring(str.indexOf(posStr) + posStr.length());
     }
 
     /**
      * @return 已转换过的文件集合(缓存)
      */
+    @Override
     public Map<String, String> listConvertedFiles() {
         return cacheService.getPDFCache();
     }
@@ -79,6 +90,7 @@ public class FileHandlerService implements InitializingBean {
     /**
      * @return 已转换过的文件，根据文件名获取
      */
+    @Override
     public String getConvertedFile(String key) {
         return cacheService.getPDFCache(key);
     }
@@ -87,6 +99,7 @@ public class FileHandlerService implements InitializingBean {
      * @param key pdf本地路径
      * @return 已将pdf转换成图片的图片本地相对路径
      */
+    @Override
     public Integer getPdf2jpgCache(String key) {
         return cacheService.getPdfImageCache(key);
     }
@@ -98,6 +111,7 @@ public class FileHandlerService implements InitializingBean {
      * @param path 类似这种：C:\Users\yudian-it\Downloads
      * @return 文件名
      */
+    @Override
     public String getFileNameFromPath(String path) {
         return path.substring(path.lastIndexOf(File.separator) + 1);
     }
@@ -108,6 +122,7 @@ public class FileHandlerService implements InitializingBean {
      * @param absolutePath 绝对路径
      * @return 相对路径
      */
+    @Override
     public String getRelativePath(String absolutePath) {
         return absolutePath.substring(fileDir.length());
     }
@@ -118,6 +133,7 @@ public class FileHandlerService implements InitializingBean {
      * @param fileName pdf文件名
      * @param value    缓存相对路径
      */
+    @Override
     public void addConvertedFile(String fileName, String value) {
         cacheService.putPDFCache(fileName, value);
     }
@@ -128,6 +144,7 @@ public class FileHandlerService implements InitializingBean {
      * @param pdfFilePath pdf文件绝对路径
      * @param num         图片张数
      */
+    @Override
     public void addPdf2jpgCache(String pdfFilePath, int num) {
         cacheService.putPdfImageCache(pdfFilePath, num);
     }
@@ -138,6 +155,7 @@ public class FileHandlerService implements InitializingBean {
      * @param compressFileKey compressFileKey
      * @return 图片文件访问url列表
      */
+    @Override
     public List<String> getImgCache(String compressFileKey) {
         return cacheService.getImgCache(compressFileKey);
     }
@@ -148,6 +166,7 @@ public class FileHandlerService implements InitializingBean {
      * @param fileKey fileKey
      * @param imgs    图片文件访问url列表
      */
+    @Override
     public void putImgCache(String fileKey, List<String> imgs) {
         cacheService.putImgCache(fileKey, imgs);
     }
@@ -167,6 +186,7 @@ public class FileHandlerService implements InitializingBean {
      *
      * @param outFilePath 文件绝对路径
      */
+    @Override
     public void doActionConvertedFile(String outFilePath) {
         String charset = EncodingDetects.getJavaEncode(outFilePath);
         StringBuilder sb = new StringBuilder();
@@ -240,6 +260,7 @@ public class FileHandlerService implements InitializingBean {
      * pdfName     pdf文件名称
      * loadPdf2jpgCache 图片访问集合
      */
+    @Override
     public List<String> pdf2jpg(String fileNameFilePath, String pdfFilePath, String pdfName, FileAttribute fileAttribute) throws Exception {
         boolean forceUpdatedCache = fileAttribute.forceUpdatedCache();
         boolean usePasswordCache = fileAttribute.getUsePasswordCache();
@@ -323,6 +344,7 @@ public class FileHandlerService implements InitializingBean {
      * @param outputFilePath pdf输出文件路径
      * @return 转换是否成功
      */
+    @Override
     public String cadToPdf(String inputFilePath, String outputFilePath, String cadPreviewType, FileAttribute fileAttribute) throws Exception {
         final InterruptionTokenSource source = new InterruptionTokenSource();//CAD延时
         if (fileAttribute.isCompressFile()) { //判断 是压缩包的创建新的目录
@@ -410,20 +432,12 @@ public class FileHandlerService implements InitializingBean {
     }
 
     /**
-     * @param str    原字符串（待截取原串）
-     * @param posStr 指定字符串
-     * @return 截取截取指定字符串之后的数据
-     */
-    public static String getSubString(String str, String posStr) {
-        return str.substring(str.indexOf(posStr) + posStr.length());
-    }
-    
-    /**
      * 获取文件属性
      *
      * @param url url
      * @return 文件属性
      */
+    @Override
     public FileAttribute getFileAttribute(String url, HttpServletRequest req) {
         FileAttribute attribute = new FileAttribute();
         String suffix;
@@ -455,7 +469,7 @@ public class FileHandlerService implements InitializingBean {
                 // http://127.0.0.1:8012/preview/各类型文件1 - 副本.zip_/各类型文件/正常预览/PPT转的PDF.pdf?kkCompressfileKey=各类型文件1 - 副本.zip_ 获取路径就会错误 需要下面的方法
                 URL urll = new URL(url);
                 String _Path = urll.getPath(); //获取url路径
-                String urlStrr = getSubString(_Path, compressFileKey); //反代情况下添加前缀,只获取有压缩包字符的路径
+                String urlStrr = FileHandlerServiceImpl.getSubString(_Path, compressFileKey); //反代情况下添加前缀,只获取有压缩包字符的路径
                 originFileName = compressFileKey + urlStrr.trim(); //拼接完整路径
                 originFileName = URLDecoder.decode(originFileName, uriEncoding); //压缩包文件中文编码问题
                 attribute.setSkipDownLoad(true);
@@ -556,6 +570,7 @@ public class FileHandlerService implements InitializingBean {
     /**
      * @return 已转换过的视频文件集合(缓存)
      */
+    @Override
     public Map<String, String> listConvertedMedias() {
         return cacheService.getMediaConvertCache();
     }
@@ -566,6 +581,7 @@ public class FileHandlerService implements InitializingBean {
      * @param fileName
      * @param value
      */
+    @Override
     public void addConvertedMedias(String fileName, String value) {
         cacheService.putMediaConvertCache(fileName, value);
     }
@@ -573,6 +589,7 @@ public class FileHandlerService implements InitializingBean {
     /**
      * @return 已转换视频文件缓存，根据文件名获取
      */
+    @Override
     public String getConvertedMedias(String key) {
         return cacheService.getMediaConvertCache(key);
     }

@@ -1,7 +1,6 @@
 package cn.keking.utils;
 
 import cn.keking.config.ConfigConstants;
-import cn.keking.web.filter.BaseUrlFilter;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.io.FileChannelRandomAccessSource;
@@ -39,7 +38,7 @@ public class ConvertPicUtil {
      */
     public static List<String> convertTif2Jpg(String strInputFile, String strOutputFile, boolean forceUpdatedCache) throws Exception {
         List<String> listImageFiles = new ArrayList<>();
-        String baseUrl = BaseUrlFilter.getBaseUrl();
+        String baseUrl = WebUtils.getBaseUrl();
         if (!new File(strInputFile).exists()) {
             logger.info("找不到文件【" + strInputFile + "】");
             return null;

@@ -3,6 +3,7 @@ package cn.keking.service;
 import cn.keking.model.FileAttribute;
 import cn.keking.model.FileType;
 import cn.keking.service.cache.CacheService;
+import cn.keking.service.impl.FileHandlerServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -21,9 +22,9 @@ public class FileConvertQueueTask {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private final FilePreviewFactory previewFactory;
     private final CacheService cacheService;
-    private final FileHandlerService fileHandlerService;
+    private final FileHandlerServiceImpl fileHandlerService;
 
-    public FileConvertQueueTask(FilePreviewFactory previewFactory, CacheService cacheService, FileHandlerService fileHandlerService) {
+    public FileConvertQueueTask(FilePreviewFactory previewFactory, CacheService cacheService, FileHandlerServiceImpl fileHandlerService) {
         this.previewFactory = previewFactory;
         this.cacheService = cacheService;
         this.fileHandlerService = fileHandlerService;
@@ -41,11 +42,11 @@ public class FileConvertQueueTask {
         private final Logger logger = LoggerFactory.getLogger(ConvertTask.class);
         private final FilePreviewFactory previewFactory;
         private final CacheService cacheService;
-        private final FileHandlerService fileHandlerService;
+        private final FileHandlerServiceImpl fileHandlerService;
 
         public ConvertTask(FilePreviewFactory previewFactory,
                            CacheService cacheService,
-                           FileHandlerService fileHandlerService) {
+                           FileHandlerServiceImpl fileHandlerService) {
             this.previewFactory = previewFactory;
             this.cacheService = cacheService;
             this.fileHandlerService = fileHandlerService;

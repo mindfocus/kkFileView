@@ -7,10 +7,9 @@ import cn.keking.service.FileHandlerService;
 import cn.keking.service.FilePreview;
 import cn.keking.utils.DownloadUtils;
 import cn.keking.utils.KkFileUtils;
-import cn.keking.web.filter.BaseUrlFilter;
+import cn.keking.utils.WebUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import static cn.keking.service.impl.OfficeFilePreviewImpl.getPreviewType;
@@ -37,7 +36,7 @@ public class CadFilePreviewImpl implements FilePreview {
     public String filePreviewHandle(String url, Model model, FileAttribute fileAttribute) {
         // 预览Type，参数传了就取参数的，没传取系统默认
         String officePreviewType = fileAttribute.getOfficePreviewType() == null ? ConfigConstants.getOfficePreviewType() : fileAttribute.getOfficePreviewType();
-        String baseUrl = BaseUrlFilter.getBaseUrl();
+        String baseUrl = WebUtils.getBaseUrl();
         boolean forceUpdatedCache = fileAttribute.forceUpdatedCache();
         String fileName = fileAttribute.getName();
         String cadPreviewType = ConfigConstants.getCadPreviewType();

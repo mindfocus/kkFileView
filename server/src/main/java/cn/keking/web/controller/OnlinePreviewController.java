@@ -1,7 +1,7 @@
 package cn.keking.web.controller;
 
 import cn.keking.model.FileAttribute;
-import cn.keking.service.FileHandlerService;
+import cn.keking.service.impl.FileHandlerServiceImpl;
 import cn.keking.service.FilePreview;
 import cn.keking.service.FilePreviewFactory;
 import cn.keking.service.cache.CacheService;
@@ -44,10 +44,10 @@ public class OnlinePreviewController {
 
     private final FilePreviewFactory previewFactory;
     private final CacheService cacheService;
-    private final FileHandlerService fileHandlerService;
+    private final FileHandlerServiceImpl fileHandlerService;
     private final OtherFilePreviewImpl otherFilePreview;
 
-    public OnlinePreviewController(FilePreviewFactory filePreviewFactory, FileHandlerService fileHandlerService, CacheService cacheService, OtherFilePreviewImpl otherFilePreview) {
+    public OnlinePreviewController(FilePreviewFactory filePreviewFactory, FileHandlerServiceImpl fileHandlerService, CacheService cacheService, OtherFilePreviewImpl otherFilePreview) {
         this.previewFactory = filePreviewFactory;
         this.fileHandlerService = fileHandlerService;
         this.cacheService = cacheService;

@@ -9,13 +9,12 @@ import cn.keking.service.OfficeToPdfService;
 import cn.keking.utils.DownloadUtils;
 import cn.keking.utils.KkFileUtils;
 import cn.keking.utils.OfficeUtils;
-import cn.keking.web.filter.BaseUrlFilter;
+import cn.keking.utils.WebUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.poi.EncryptedDocumentException;
 import org.jodconverter.core.office.OfficeException;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
@@ -47,7 +46,7 @@ public class OfficeFilePreviewImpl implements FilePreview {
         // 预览Type，参数传了就取参数的，没传取系统默认
         String officePreviewType = fileAttribute.getOfficePreviewType();
         boolean userToken = fileAttribute.getUsePasswordCache();
-        String baseUrl = BaseUrlFilter.getBaseUrl();
+        String baseUrl = WebUtils.getBaseUrl();
         String suffix = fileAttribute.getSuffix();  //获取文件后缀
         String fileName = fileAttribute.getName(); //获取文件原始名称
         String filePassword = fileAttribute.getFilePassword(); //获取密码

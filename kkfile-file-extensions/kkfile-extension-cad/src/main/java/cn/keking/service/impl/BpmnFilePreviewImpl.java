@@ -2,6 +2,7 @@ package cn.keking.service.impl;
 
 import cn.keking.model.FileAttribute;
 import cn.keking.service.FilePreview;
+import cn.keking.service.impl.CommonPreviewImpl;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 

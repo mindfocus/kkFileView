@@ -5,14 +5,8 @@ import cn.keking.model.ReturnResponse;
 import cn.keking.service.FileHandlerService;
 import cn.keking.service.FilePreview;
 import cn.keking.utils.DownloadUtils;
-import cn.keking.utils.KkFileUtils;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.util.CollectionUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by kl on 2018/1/17.
