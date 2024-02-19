@@ -10,7 +10,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <jodconverter.version>4.4.6</jodconverter.version>
+        <jodconverter.version>4.4.7</jodconverter.version>
         <spring.boot.version>2.4.2</spring.boot.version>
         <poi.version>5.2.2</poi.version>
         <xdocreport.version>1.0.6</xdocreport.version>
@@ -50,7 +50,8 @@
 
     <modules>
         <module>server</module>
-        <module>kkfile-file-extensions/kkfile-extension-cad</module>
+        <module>kkfile-file-extensions</module>
+        <module>kkfile-file-downloaders</module>
         <module>kkfile-common</module>
     </modules>
 
@@ -92,8 +93,28 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.keking</groupId>
+                <artifactId>kkfile-common</artifactId>
+                <version>4.4.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
                 <groupId>cn.keking</groupId>
                 <artifactId>kkfile-extension-cad</artifactId>
+                <version>4.4.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.keking</groupId>
+                <artifactId>kkfile-extension-office</artifactId>
                 <version>4.4.0-SNAPSHOT</version>
             </dependency>
         </dependencies>

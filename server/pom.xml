@@ -34,6 +34,14 @@
     </repositories>
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.pandadoc</groupId>
+            <artifactId>pandadoc-java-client</artifactId>
+            <version>6.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.jodconverter</groupId>
             <artifactId>jodconverter-local</artifactId>
@@ -259,6 +267,19 @@
             <groupId>cn.keking</groupId>
             <artifactId>kkfile-extension-cad</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>cn.keking</groupId>
+            <artifactId>kkfile-extension-office</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jodconverter</groupId>
+            <artifactId>jodconverter-local-lo</artifactId>
+            <version>4.4.7</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>

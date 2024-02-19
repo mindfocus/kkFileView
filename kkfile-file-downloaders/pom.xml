@@ -10,10 +10,9 @@
     </parent>
 
     <packaging>pom</packaging>
-    <artifactId>kkfile-file-extensions</artifactId>
+    <artifactId>kkfile-file-downloaders</artifactId>
     <modules>
-        <module>kkfile-extension-cad</module>
-        <module>kkfile-extension-office</module>
+        <module>kkfile-download-http</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
