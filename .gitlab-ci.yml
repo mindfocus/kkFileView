@@ -107,25 +107,25 @@ sonarqube-check:
     - main
     - develop
 
-deploy-job:
-  stage: deploy
-  dependencies:
-    - build-job
-  image: docker:24.0.5
-  services:
-    - docker:24.0.5-dind
-  before_script:
-    - docker info
-  cache:
-    key: "maven-$CI_COMMIT_REF_SLUG"
-    paths:
-      - docker/jar
-    policy: pull
-  only:
-    - master
-  script:
-    - docker login -u "admin" -p "Harbor12345" 172.16.86.12
-    - cd docker/ && docker build -t gateway:$CI_COMMIT_REF_SLUG -f ./ruoyi/gateway/dockerfile ./jar/gateway && docker tag gateway:$CI_COMMIT_REF_SLUG 172.16.86.12/bigdata/gateway:$CI_COMMIT_REF_SLUG && docker push 172.16.86.12/bigdata/gateway:$CI_COMMIT_REF_SLUG
-    - docker build -t auth:$CI_COMMIT_REF_SLUG -f ./ruoyi/auth/dockerfile ./jar/auth && docker tag auth:$CI_COMMIT_REF_SLUG 172.16.86.12/bigdata/auth:$CI_COMMIT_REF_SLUG && docker push 172.16.86.12/bigdata/auth:$CI_COMMIT_REF_SLUG
-    - docker build -t gdm:$CI_COMMIT_REF_SLUG -f ./ruoyi/modules/gdm/dockerfile ./jar/modules/gdm && docker tag gdm:$CI_COMMIT_REF_SLUG 172.16.86.12/bigdata/gdm:$CI_COMMIT_REF_SLUG && docker push 172.16.86.12/bigdata/gdm:$CI_COMMIT_REF_SLUG
+# deploy-job:
+#   stage: deploy
+#   dependencies:
+#     - build-job
+#   image: docker:24.0.5
+#   services:
+#     - docker:24.0.5-dind
+#   before_script:
+#     - docker info
+#   cache:
+#     key: "maven-$CI_COMMIT_REF_SLUG"
+#     paths:
+#       - docker/jar
+#     policy: pull
+#   only:
+#     - master
+#   script:
+#     - docker login -u "admin" -p "Harbor12345" 172.16.86.12
+#     - cd docker/ && docker build -t gateway:$CI_COMMIT_REF_SLUG -f ./ruoyi/gateway/dockerfile ./jar/gateway && docker tag gateway:$CI_COMMIT_REF_SLUG 172.16.86.12/bigdata/gateway:$CI_COMMIT_REF_SLUG && docker push 172.16.86.12/bigdata/gateway:$CI_COMMIT_REF_SLUG
+#     - docker build -t auth:$CI_COMMIT_REF_SLUG -f ./ruoyi/auth/dockerfile ./jar/auth && docker tag auth:$CI_COMMIT_REF_SLUG 172.16.86.12/bigdata/auth:$CI_COMMIT_REF_SLUG && docker push 172.16.86.12/bigdata/auth:$CI_COMMIT_REF_SLUG
+#     - docker build -t gdm:$CI_COMMIT_REF_SLUG -f ./ruoyi/modules/gdm/dockerfile ./jar/modules/gdm && docker tag gdm:$CI_COMMIT_REF_SLUG 172.16.86.12/bigdata/gdm:$CI_COMMIT_REF_SLUG && docker push 172.16.86.12/bigdata/gdm:$CI_COMMIT_REF_SLUG
 
