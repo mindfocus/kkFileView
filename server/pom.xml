@@ -11,6 +11,10 @@
 
     <artifactId>kkFileView</artifactId>
 
+    <properties>
+        <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
+    </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>

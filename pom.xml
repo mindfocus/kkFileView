@@ -46,6 +46,11 @@
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <sonar.projectKey>big_data_integrated-system_integrated-system-kkfile_AY2-2pouCaPa2gC5UZQV</sonar.projectKey>
+        <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
+        <sonar.projectName>integrated-system-kkfile</sonar.projectName>
+        <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
     </properties>
 
     <modules>

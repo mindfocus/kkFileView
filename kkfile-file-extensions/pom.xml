@@ -10,7 +10,9 @@
     </parent>
 
     <packaging>pom</packaging>
+
     <artifactId>kkfile-file-extensions</artifactId>
+
     <modules>
         <module>kkfile-extension-cad</module>
         <module>kkfile-extension-office</module>
@@ -19,6 +21,7 @@
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
     </properties>
 
 </project>
