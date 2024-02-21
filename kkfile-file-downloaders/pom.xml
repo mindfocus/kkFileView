@@ -13,6 +13,7 @@
     <artifactId>kkfile-file-downloaders</artifactId>
     <modules>
         <module>kkfile-download-http</module>
+        <module>kkfile-download-vfile</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

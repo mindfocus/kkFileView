@@ -5,7 +5,7 @@ import cn.keking.service.impl.FileHandlerServiceImpl;
 import cn.keking.service.FilePreview;
 import cn.keking.service.FilePreviewFactory;
 import cn.keking.service.cache.CacheService;
-import cn.keking.service.impl.OtherFilePreviewImpl;
+import cn.keking.service.OtherFilePreviewImpl;
 import cn.keking.utils.KkFileUtils;
 import cn.keking.utils.WebUtils;
 import fr.opensagres.xdocreport.core.io.IOUtils;

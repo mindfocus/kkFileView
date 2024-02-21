@@ -3,6 +3,8 @@ package cn.keking.service;
 import cn.keking.model.FileAttribute;
 import org.springframework.ui.Model;
 
+import java.util.List;
+
 /**
  * Created by kl on 2018/1/17.
  * Content :
@@ -35,4 +37,5 @@ public interface FilePreview {
     String CSV_FILE_PREVIEW_PAGE = "csv";
 
     String filePreviewHandle(String url, Model model, FileAttribute fileAttribute);
+    List<String> supportfileTypes();
 }

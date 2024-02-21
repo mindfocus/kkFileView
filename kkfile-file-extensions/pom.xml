@@ -14,6 +14,8 @@
     <modules>
         <module>kkfile-extension-cad</module>
         <module>kkfile-extension-office</module>
+        <module>kkfile-extension-media</module>
+        <module>kkfile-extension-commons</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -1,11 +1,13 @@
 package cn.keking.model;
 
 import cn.keking.config.ConfigConstants;
+import lombok.Data;
 
 /**
  * Created by kl on 2018/1/17.
  * Content :
  */
+@Data
 public class FileAttribute {
 
     private FileType type;

@@ -5,6 +5,8 @@ import cn.keking.model.FileAttribute;
 import cn.keking.model.ReturnResponse;
 import cn.keking.service.FileHandlerService;
 import cn.keking.service.FilePreview;
+import cn.keking.service.OfficeFilePreviewImpl;
+import cn.keking.service.OtherFilePreviewImpl;
 import cn.keking.utils.DownloadUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.poi.EncryptedDocumentException;
@@ -94,5 +96,10 @@ public class PdfFilePreviewImpl implements FilePreview {
             }
         }
         return PDF_FILE_PREVIEW_PAGE;
+    }
+
+    @Override
+    public List<String> supportfileTypes() {
+        return List.of("pdf");
     }
 }
