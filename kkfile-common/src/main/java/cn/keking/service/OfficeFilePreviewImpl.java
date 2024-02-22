@@ -46,12 +46,12 @@ public class OfficeFilePreviewImpl implements FilePreview {
     public String filePreviewHandle(String url, Model model, FileAttribute fileAttribute) {
         // 预览Type，参数传了就取参数的，没传取系统默认
         String officePreviewType = fileAttribute.getOfficePreviewType();
-        boolean userToken = fileAttribute.getUsePasswordCache();
+        boolean userToken = fileAttribute.isUsePasswordCache();
         String baseUrl = WebUtils.getBaseUrl();
         String suffix = fileAttribute.getSuffix();  //获取文件后缀
         String fileName = fileAttribute.getName(); //获取文件原始名称
         String filePassword = fileAttribute.getFilePassword(); //获取密码
-        boolean forceUpdatedCache=fileAttribute.forceUpdatedCache();  //是否启用强制更新命令
+        boolean forceUpdatedCache=fileAttribute.getForceUpdatedCache();  //是否启用强制更新命令
         boolean isHtmlView = fileAttribute.isHtmlView();  //xlsx  转换成html
         String cacheName = fileAttribute.getCacheName();  //转换后的文件名
         String outFilePath = fileAttribute.getOutFilePath();  //转换后生成文件的路径

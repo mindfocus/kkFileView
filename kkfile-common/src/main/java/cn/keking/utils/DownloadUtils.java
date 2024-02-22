@@ -77,7 +77,7 @@ public class DownloadUtils {
             return response;
         }
         // 如果文件是否已经存在、且不强制更新，则直接返回文件路径
-        if (KkFileUtils.isExist(realPath) && !fileAttribute.forceUpdatedCache()) {
+        if (KkFileUtils.isExist(realPath) && !fileAttribute.getForceUpdatedCache()) {
             response.setContent(realPath);
             response.setMsg(fileName);
             return response;

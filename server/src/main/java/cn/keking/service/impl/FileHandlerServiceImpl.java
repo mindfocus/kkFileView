@@ -261,8 +261,8 @@ public class FileHandlerServiceImpl implements InitializingBean, FileHandlerServ
      */
     @Override
     public List<String> pdf2jpg(String fileNameFilePath, String pdfFilePath, String pdfName, FileAttribute fileAttribute) throws Exception {
-        boolean forceUpdatedCache = fileAttribute.forceUpdatedCache();
-        boolean usePasswordCache = fileAttribute.getUsePasswordCache();
+        boolean forceUpdatedCache = fileAttribute.getForceUpdatedCache();
+        boolean usePasswordCache = fileAttribute.isUsePasswordCache();
         String filePassword = fileAttribute.getFilePassword();
         String pdfPassword = null;
         PDDocument doc = null;

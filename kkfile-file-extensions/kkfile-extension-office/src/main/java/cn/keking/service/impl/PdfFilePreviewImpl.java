@@ -34,7 +34,7 @@ public class PdfFilePreviewImpl implements FilePreview {
     public String filePreviewHandle(String url, Model model, FileAttribute fileAttribute) {
         String pdfName = fileAttribute.getName();  //获取原始文件名
         String officePreviewType = fileAttribute.getOfficePreviewType(); //转换类型
-        boolean forceUpdatedCache=fileAttribute.forceUpdatedCache();  //是否启用强制更新命令
+        boolean forceUpdatedCache=fileAttribute.getForceUpdatedCache();  //是否启用强制更新命令
         String outFilePath = fileAttribute.getOutFilePath();  //生成的文件路径
         String originFilePath = fileAttribute.getOriginFilePath();  //原始文件路径
         if (OfficeFilePreviewImpl.OFFICE_PREVIEW_TYPE_IMAGE.equals(officePreviewType) || OfficeFilePreviewImpl.OFFICE_PREVIEW_TYPE_ALL_IMAGES.equals(officePreviewType)) {

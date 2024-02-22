@@ -53,14 +53,6 @@ public class FileAttribute {
         this.officePreviewType = officePreviewType;
     }
 
-    public boolean isCompressFile() {
-        return isCompressFile;
-    }
-
-    public void setCompressFile(boolean compressFile) {
-        isCompressFile = compressFile;
-    }
-
     public String getFilePassword() {
         return filePassword;
     }
@@ -69,28 +61,12 @@ public class FileAttribute {
         this.filePassword = filePassword;
     }
 
-    public boolean getUsePasswordCache() {
-        return usePasswordCache;
-    }
-
-    public void setUsePasswordCache(boolean usePasswordCache) {
-        this.usePasswordCache = usePasswordCache;
-    }
-
     public String getOfficePreviewType() {
         return officePreviewType;
     }
 
     public void setOfficePreviewType(String officePreviewType) {
         this.officePreviewType = officePreviewType;
-    }
-
-    public FileType getType() {
-        return type;
-    }
-
-    public void setType(FileType type) {
-        this.type = type;
     }
 
     public String getSuffix() {
@@ -169,12 +145,6 @@ public class FileAttribute {
 
     public void setTifPreviewType(String previewType) {
         this.tifPreviewType = previewType;
-    }
-    public Boolean forceUpdatedCache() {
-        return forceUpdatedCache;
-    }
-    public void setForceUpdatedCache(Boolean forceUpdatedCache) {
-        this.forceUpdatedCache = forceUpdatedCache;
     }
 
     public String getKkProxyAuthorization() {

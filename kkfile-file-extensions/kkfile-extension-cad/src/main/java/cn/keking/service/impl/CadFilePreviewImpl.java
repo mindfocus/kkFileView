@@ -40,7 +40,7 @@ public class CadFilePreviewImpl implements FilePreview {
         // 预览Type，参数传了就取参数的，没传取系统默认
         String officePreviewType = fileAttribute.getOfficePreviewType() == null ? ConfigConstants.getOfficePreviewType() : fileAttribute.getOfficePreviewType();
         String baseUrl = WebUtils.getBaseUrl();
-        boolean forceUpdatedCache = fileAttribute.forceUpdatedCache();
+        boolean forceUpdatedCache = fileAttribute.getForceUpdatedCache();
         String fileName = fileAttribute.getName();
         String cadPreviewType = ConfigConstants.getCadPreviewType();
         String cacheName = fileAttribute.getCacheName();

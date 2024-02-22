@@ -1,4 +1,4 @@
-package cn.keking.config;
+package cn.keking.service.config;
 
 import io.netty.channel.nio.NioEventLoopGroup;
 import org.apache.commons.lang3.StringUtils;
