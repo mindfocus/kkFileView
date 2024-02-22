@@ -217,6 +217,10 @@
             <artifactId>kkfile-cache-jdk</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>cn.keking</groupId>
+            <artifactId>kkfile-cache-rocksdb</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>cn.keking</groupId>

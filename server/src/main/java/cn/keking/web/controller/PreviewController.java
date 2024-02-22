@@ -1,17 +1,21 @@
 package cn.keking.web.controller;
 
 import cn.keking.model.FileAttribute;
+import cn.keking.model.ReturnResponse;
+import cn.keking.service.FileConvertServiceFactory;
 import cn.keking.service.FilePreview;
 import cn.keking.service.FilePreviewFactory;
 import cn.keking.service.cache.CacheService;
 import cn.keking.service.impl.FileHandlerServiceImpl;
 import cn.keking.service.OtherFilePreviewImpl;
+import cn.keking.utils.DownloadUtils;
 import cn.keking.utils.KkFileUtils;
 import cn.keking.utils.WebUtils;
-import fr.opensagres.xdocreport.core.io.IOUtils;
 import io.mola.galimatias.GalimatiasParseException;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.IOUtils;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,13 +24,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLDecoder;
+import java.net.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
 
@@ -45,28 +49,31 @@ public class PreviewController {
     private final FileHandlerServiceImpl fileHandlerService;
     private final OtherFilePreviewImpl otherFilePreview;
 
-    public PreviewController(FilePreviewFactory filePreviewFactory, FileHandlerServiceImpl fileHandlerService, CacheService cacheService, OtherFilePreviewImpl otherFilePreview) {
+    private final FileConvertServiceFactory convertFactory;
+
+    public PreviewController(FilePreviewFactory filePreviewFactory, FileHandlerServiceImpl fileHandlerService, CacheService cacheService, OtherFilePreviewImpl otherFilePreview, FileConvertServiceFactory convertFactory) {
         this.previewFactory = filePreviewFactory;
         this.fileHandlerService = fileHandlerService;
         this.cacheService = cacheService;
         this.otherFilePreview = otherFilePreview;
+        this.convertFactory = convertFactory;
     }
 
-    @GetMapping( "/preview")
-    public String preview(String url, Model model, HttpServletRequest req) {
+    @GetMapping("/preview")
+    public void preview(String url, HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-        String fileUrl;
-        try {
-            fileUrl = WebUtils.decodeUrl(url);
-        } catch (Exception ex) {
-            String errorMsg = String.format(BASE64_DECODE_ERROR_MSG, "url");
-            return otherFilePreview.notSupportedFile(model, errorMsg);
-        }
+        String fileUrl = WebUtils.decodeUrl(url);
         FileAttribute fileAttribute = fileHandlerService.getFileAttribute(fileUrl, req);
-        model.addAttribute("file", fileAttribute);
-        FilePreview filePreview = previewFactory.get(fileAttribute);
-        log.info("预览文件url：{}，previewType：{}", fileUrl, fileAttribute.getType());
-        return filePreview.filePreviewHandle(fileUrl, model, fileAttribute);
+        val fileConverter = convertFactory.getFileConvertService(fileAttribute.getSuffix(), "pdf");
+        val result = fileConverter.convert(fileAttribute, fileAttribute.getName());
+        File r = new File(result.getContent());
+        if (!r.exists()) {
+            throw new IOException("文件未找到");
+        }
+        try (val tempStream = Files.newInputStream(r.toPath())) {
+            FileNameMap fileNameMap = URLConnection.getFileNameMap();
+            resp.setContentType(fileNameMap.getContentTypeFor(result.getContent()));
+            IOUtils.copy(tempStream, resp.getOutputStream());
+        }
     }
-
 }

@@ -486,6 +486,7 @@ public class FileHandlerServiceImpl implements InitializingBean, FileHandlerServ
                 e.printStackTrace();
             }
         }
+        // TODO 可转换格式不能写死在这部分逻辑内，应该由转换器判断
         originFileName = KkFileUtils.htmlEscape(originFileName);  //文件名处理
         boolean isHtmlView = suffix.equalsIgnoreCase("xls") || suffix.equalsIgnoreCase("xlsx") || suffix.equalsIgnoreCase("csv") || suffix.equalsIgnoreCase("xlsm") || suffix.equalsIgnoreCase("xlt") || suffix.equalsIgnoreCase("xltm") || suffix.equalsIgnoreCase("et") || suffix.equalsIgnoreCase("ett") || suffix.equalsIgnoreCase("xlam");
         String cacheFilePrefixName = originFileName.substring(0, originFileName.lastIndexOf(".")) + suffix + "."; //这里统一文件名处理 下面更具类型 各自添加后缀
