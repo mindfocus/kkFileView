@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>cn.keking</groupId>
-        <artifactId>kkfile-file-downloaders</artifactId>
+        <artifactId>kkfile-file-converter</artifactId>
         <version>4.4.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>kkfile-download-http</artifactId>
+    <artifactId>kkfile-converter-tohtml</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

@@ -17,7 +17,6 @@ import com.aspose.cad.imageoptions.CadRasterizationOptions;
 import com.aspose.cad.imageoptions.PdfOptions;
 import com.aspose.cad.imageoptions.SvgOptions;
 import com.aspose.cad.imageoptions.TiffOptions;
-import com.aspose.cad.internal.Exceptions.TimeoutException;
 import com.itextpdf.text.pdf.PdfReader;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.pdfbox.pdmodel.PDDocument;

@@ -45,6 +45,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.jodconverter</groupId>
+            <artifactId>jodconverter-local-lo</artifactId>
+            <version>${jodconverter.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.30</version>

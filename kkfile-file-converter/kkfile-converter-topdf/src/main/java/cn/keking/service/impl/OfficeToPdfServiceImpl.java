@@ -2,6 +2,8 @@ package cn.keking.service.impl;
 
 import cn.keking.config.ConfigConstants;
 import cn.keking.model.FileAttribute;
+import cn.keking.model.ReturnResponse;
+import cn.keking.service.FileConvert;
 import cn.keking.service.OfficeToPdfService;
 import com.sun.star.document.UpdateDocMode;
 import org.apache.commons.lang3.StringUtils;
@@ -13,13 +15,14 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * @author yudian-it
  */
 @Component
-public class OfficeToPdfServiceImpl implements OfficeToPdfService {
+public class OfficeToPdfServiceImpl implements OfficeToPdfService, FileConvert {
 
     private final static Logger logger = LoggerFactory.getLogger(OfficeToPdfServiceImpl.class);
 
@@ -99,4 +102,18 @@ public class OfficeToPdfServiceImpl implements OfficeToPdfService {
         }
     }
 
+    @Override
+    public ReturnResponse<String> convert(FileAttribute fileAttribute, String fileName) {
+        return null;
+    }
+
+    @Override
+    public List<String> supportConvertType() {
+        return List.of("xls", "xlsx");
+    }
+
+    @Override
+    public List<String> supportConvertedType() {
+        return List.of("pdf");
+    }
 }
