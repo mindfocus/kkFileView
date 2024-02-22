@@ -59,9 +59,6 @@ build-job:       # This job runs in the build stage, which runs first.
     - mvn $MAVEN_CLI_OPTS clean package -DskipTests=true -s $MAVEN_SETTINGS_PATH
     - echo "Compile complete."
     - echo $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)-$CI_COMMIT_SHORT_SHA > .version
-#    - mvn $MAVEN_CLI_OPTS deploy -DskipTests=true -f pom.xml -s $MAVEN_SETTINGS_PATH
-#    - cd ruoyi-plugins && mvn $MAVEN_CLI_OPTS clean package -DskipTests=true -s $MAVEN_SETTINGS_PATH
-    - cd docker && sh copy.sh
   artifacts:
     name: "Maven artifacts from $CI_PROJECT_NAME on $CI_COMMIT_REF_SLUG"
     paths:
