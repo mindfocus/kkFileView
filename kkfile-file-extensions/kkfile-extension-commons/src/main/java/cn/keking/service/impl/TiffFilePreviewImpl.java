@@ -35,7 +35,7 @@ public class TiffFilePreviewImpl implements FilePreview {
         String tifPreviewType = ConfigConstants.getTifPreviewType();
         String cacheName =  fileAttribute.getCacheName();
         String outFilePath = fileAttribute.getOutFilePath();
-        boolean forceUpdatedCache=fileAttribute.forceUpdatedCache();
+        boolean forceUpdatedCache=fileAttribute.getForceUpdatedCache();
         if ("jpg".equalsIgnoreCase(tifPreviewType) || "pdf".equalsIgnoreCase(tifPreviewType)) {
             if (forceUpdatedCache || !fileHandlerService.listConvertedFiles().containsKey(cacheName) || !ConfigConstants.isCacheEnabled()) {
                 ReturnResponse<String> response = DownloadUtils.downLoad(fileAttribute, fileName);

@@ -42,7 +42,7 @@ public class MediaFilePreviewImpl implements FilePreview {
         String suffix = fileAttribute.getSuffix();
         String cacheName = fileAttribute.getCacheName();
         String outFilePath = fileAttribute.getOutFilePath();
-        boolean forceUpdatedCache = fileAttribute.forceUpdatedCache();
+        boolean forceUpdatedCache = fileAttribute.getForceUpdatedCache();
         FileType type = fileAttribute.getType();
         String[] mediaTypesConvert = FileType.MEDIA_CONVERT_TYPES;  //获取支持的转换格式
         boolean mediaTypes = false;
